@@ -71,6 +71,11 @@ func (r Run) newIC() *wml.EG_RunInnerContent {
 	r.x.EG_RunInnerContent = append(r.x.EG_RunInnerContent, ic)
 	return ic
 }
+func (r Run) newAC() *wml.CT_AlternateContent {
+	ac := wml.NewCT_AlternateContent()
+	r.x.CT_AlternateContent = append(r.x.CT_AlternateContent, ac)
+	return ac
+}
 
 // Clear removes all of the content from within a run.
 func (r Run) Clear() {
@@ -133,6 +138,99 @@ func (r Run) AddPageBreak() {
 	ic.Br.TypeAttr = wml.ST_BrTypePage
 }
 
+func (r Run) GetBoxRun() []Run {
+	ret := make([]Run, 0)
+	for _, alternateContent := range r.x.CT_AlternateContent {
+		for _, anchor := range alternateContent.Choice.Drawing.Anchor {
+			for _, wordprocessingShape := range anchor.Graphic.GraphicData.WdWsp {
+				for _, contentBlockContent := range wordprocessingShape.WChoice.Txbx.TxbxContent.EG_ContentBlockContent {
+					for _, p := range contentBlockContent.P {
+						for _, pContent := range p.EG_PContent {
+							for _, contentRunContent := range pContent.EG_ContentRunContent {
+								if contentRunContent.R != nil {
+									ret = append(ret, Run{r.D, contentRunContent.R})
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return ret
+}
+
+func (r Run) AddBoxImg(img common.ImageRef) (AnchoredDrawing, error) {
+	ac := r.newAC()
+	ac.Choice = wml.NewCT_Choice()
+	ac.Choice.Drawing = wml.NewCT_Drawing()
+	anchor := wml.NewWdAnchor()
+
+	ad := AnchoredDrawing{r.D, anchor}
+
+	// required by Word on OSX for the file to open
+	anchor.SimplePosAttr = gooxml.Bool(false)
+
+	anchor.AllowOverlapAttr = true
+	anchor.CNvGraphicFramePr = dml.NewCT_NonVisualGraphicFrameProperties()
+
+	ac.Choice.Drawing.Anchor = append(ac.Choice.Drawing.Anchor, anchor)
+	anchor.Graphic = wml.NewCT_GraphicalObject()
+	anchor.Graphic.GraphicData = wml.NewCT_GraphicalObjectData()
+	anchor.Graphic.GraphicData.UriAttr = "http://schemas.openxmlformats.org/drawingml/2006/picture"
+	anchor.SimplePos.XAttr.ST_CoordinateUnqualified = gooxml.Int64(0)
+	anchor.SimplePos.YAttr.ST_CoordinateUnqualified = gooxml.Int64(0)
+	anchor.PositionH.RelativeFromAttr = wml.WdST_RelFromHPage
+	anchor.PositionH.Choice = &wml.WdCT_PosHChoice{}
+	anchor.PositionH.Choice.PosOffset = gooxml.Int32(0)
+
+	anchor.PositionV.RelativeFromAttr = wml.WdST_RelFromVPage
+	anchor.PositionV.Choice = &wml.WdCT_PosVChoice{}
+	anchor.PositionV.Choice.PosOffset = gooxml.Int32(0)
+
+	anchor.Extent.CxAttr = int64(float64(img.Size().X*measurement.Pixel72) / measurement.EMU)
+	anchor.Extent.CyAttr = int64(float64(img.Size().Y*measurement.Pixel72) / measurement.EMU)
+	anchor.Choice = &wml.WdEG_WrapTypeChoice{}
+	anchor.Choice.WrapSquare = wml.NewWdCT_WrapSquare()
+	anchor.Choice.WrapSquare.WrapTextAttr = wml.WdST_WrapTextBothSides
+
+	// Mac Word chokes if the ID is greater than an int32, even though the field is a
+	// uint32 in the XSD
+	randID := 0x7FFFFFFF & rand.Uint32()
+	anchor.DocPr.IdAttr = randID
+	p := pic.NewPic()
+	p.NvPicPr.CNvPr.IdAttr = randID
+
+	// find the reference to the actual image file in the document relationships
+	// so we can embed via the relationship ID
+	imgID := img.RelID()
+	if imgID == "" {
+		return ad, errors.New("couldn't find reference to image within document relations")
+	}
+
+	anchor.Graphic.GraphicData.Any = append(anchor.Graphic.GraphicData.Any, p)
+	p.BlipFill = dml.NewCT_BlipFillProperties()
+	p.BlipFill.Blip = dml.NewCT_Blip()
+	p.BlipFill.Blip.EmbedAttr = &imgID
+	p.BlipFill.Stretch = dml.NewCT_StretchInfoProperties()
+	p.BlipFill.Stretch.FillRect = dml.NewCT_RelativeRect()
+
+	p.SpPr = dml.NewCT_ShapeProperties()
+	// Required to allow resizing
+	p.SpPr.Xfrm = dml.NewCT_Transform2D()
+	p.SpPr.Xfrm.Off = dml.NewCT_Point2D()
+	p.SpPr.Xfrm.Off.XAttr.ST_CoordinateUnqualified = gooxml.Int64(0)
+	p.SpPr.Xfrm.Off.YAttr.ST_CoordinateUnqualified = gooxml.Int64(0)
+	p.SpPr.Xfrm.Ext = dml.NewCT_PositiveSize2D()
+	p.SpPr.Xfrm.Ext.CxAttr = int64(img.Size().X * measurement.Point)
+	p.SpPr.Xfrm.Ext.CyAttr = int64(img.Size().Y * measurement.Point)
+	// required by Word on OSX for the image to display
+	p.SpPr.PrstGeom = dml.NewCT_PresetGeometry2D()
+	p.SpPr.PrstGeom.PrstAttr = dml.ST_ShapeTypeRect
+
+	return ad, nil
+}
+
 // DrawingAnchored returns a slice of AnchoredDrawings.
 func (r Run) DrawingAnchored() []AnchoredDrawing {
 	ret := []AnchoredDrawing{}
@@ -162,8 +260,8 @@ func (r Run) AddDrawingAnchored(img common.ImageRef) (AnchoredDrawing, error) {
 	anchor.CNvGraphicFramePr = dml.NewCT_NonVisualGraphicFrameProperties()
 
 	ic.Drawing.Anchor = append(ic.Drawing.Anchor, anchor)
-	anchor.Graphic = dml.NewGraphic()
-	anchor.Graphic.GraphicData = dml.NewCT_GraphicalObjectData()
+	anchor.Graphic = wml.NewCT_GraphicalObject()
+	anchor.Graphic.GraphicData = wml.NewCT_GraphicalObjectData()
 	anchor.Graphic.GraphicData.UriAttr = "http://schemas.openxmlformats.org/drawingml/2006/picture"
 	anchor.SimplePos.XAttr.ST_CoordinateUnqualified = gooxml.Int64(0)
 	anchor.SimplePos.YAttr.ST_CoordinateUnqualified = gooxml.Int64(0)

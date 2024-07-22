@@ -24,9 +24,10 @@ type CT_R struct {
 	// Revision Identifier for Run
 	RsidRAttr *string
 	// Run Properties
-	RPr                *CT_RPr
-	EG_RunInnerContent []*EG_RunInnerContent
-	Extra              []gooxml.Any
+	RPr                 *CT_RPr
+	EG_RunInnerContent  []*EG_RunInnerContent
+	CT_AlternateContent []*CT_AlternateContent
+	Extra               []gooxml.Any
 }
 
 func NewCT_R() *CT_R {
@@ -57,6 +58,13 @@ func (m *CT_R) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 			c.MarshalXML(e, xml.StartElement{})
 		}
 	}
+	if m.CT_AlternateContent != nil {
+		sedrawing := xml.StartElement{Name: xml.Name{Local: "mc:AlternateContent"}}
+		for _, c := range m.CT_AlternateContent {
+			e.EncodeElement(c, sedrawing)
+		}
+	}
+
 	for _, any := range m.Extra {
 		if err := any.MarshalXML(e, xml.StartElement{}); err != nil {
 			return err
@@ -373,6 +381,12 @@ lCT_R:
 					return err
 				}
 				m.EG_RunInnerContent = append(m.EG_RunInnerContent, tmpruninnercontent)
+			case xml.Name{Space: "http://schemas.openxmlformats.org/markup-compatibility/2006", Local: "AlternateContent"}:
+				tmp := NewCT_AlternateContent()
+				if err := d.DecodeElement(tmp, &el); err != nil {
+					return err
+				}
+				m.CT_AlternateContent = append(m.CT_AlternateContent, tmp)
 			default:
 				any := &gooxml.XSDAny{}
 				if err := d.DecodeElement(any, &el); err != nil {

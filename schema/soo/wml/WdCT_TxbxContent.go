@@ -61,6 +61,14 @@ lWdCT_TxbxContent:
 					return err
 				}
 				m.AltChunk = append(m.AltChunk, tmp)
+			case xml.Name{Space: "http://schemas.openxmlformats.org/wordprocessingml/2006/main", Local: "p"}:
+				tmp := NewEG_ContentBlockContent()
+				tmpP := NewCT_P()
+				if err := d.DecodeElement(tmpP, &el); err != nil {
+					return err
+				}
+				tmp.P = append(tmp.P, tmpP)
+				m.EG_ContentBlockContent = append(m.EG_ContentBlockContent, tmp)
 			default:
 				gooxml.Log("skipping unsupported element on WdCT_TxbxContent %v", el.Name)
 				if err := d.Skip(); err != nil {

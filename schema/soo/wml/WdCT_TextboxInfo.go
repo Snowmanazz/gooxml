@@ -69,7 +69,8 @@ lWdCT_TextboxInfo:
 		switch el := tok.(type) {
 		case xml.StartElement:
 			switch el.Name {
-			case xml.Name{Space: "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing", Local: "txbxContent"}:
+			case xml.Name{Space: "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing", Local: "txbxContent"},
+				xml.Name{Space: "http://schemas.openxmlformats.org/wordprocessingml/2006/main", Local: "txbxContent"}:
 				if err := d.DecodeElement(m.TxbxContent, &el); err != nil {
 					return err
 				}

@@ -38,7 +38,7 @@ type WdCT_Anchor struct {
 	Choice             *WdEG_WrapTypeChoice
 	DocPr              *dml.CT_NonVisualDrawingProps
 	CNvGraphicFramePr  *dml.CT_NonVisualGraphicFrameProperties
-	Graphic            *dml.Graphic
+	Graphic            *CT_GraphicalObject
 }
 
 func NewWdCT_Anchor() *WdCT_Anchor {
@@ -48,7 +48,7 @@ func NewWdCT_Anchor() *WdCT_Anchor {
 	ret.PositionV = NewWdCT_PosV()
 	ret.Extent = dml.NewCT_PositiveSize2D()
 	ret.DocPr = dml.NewCT_NonVisualDrawingProps()
-	ret.Graphic = dml.NewGraphic()
+	ret.Graphic = NewCT_GraphicalObject()
 	return ret
 }
 
@@ -122,7 +122,7 @@ func (m *WdCT_Anchor) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error
 	m.PositionV = NewWdCT_PosV()
 	m.Extent = dml.NewCT_PositiveSize2D()
 	m.DocPr = dml.NewCT_NonVisualDrawingProps()
-	m.Graphic = dml.NewGraphic()
+	m.Graphic = NewCT_GraphicalObject()
 	for _, attr := range start.Attr {
 		if attr.Name.Local == "distT" {
 			parsed, err := strconv.ParseUint(attr.Value, 10, 32)
