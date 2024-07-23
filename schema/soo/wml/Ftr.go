@@ -12,8 +12,8 @@ package wml
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/math"
+	"github.com/Snowmanazz/gooxml"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/math"
 )
 
 type Ftr struct {

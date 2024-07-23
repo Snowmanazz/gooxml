@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/urn/schemas_microsoft_com/vml"
+	"github.com/Snowmanazz/gooxml/schema/urn/schemas_microsoft_com/vml"
 )
 
 func TestAG_AllShapeAttributesConstructor(t *testing.T) {

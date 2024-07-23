@@ -8,9 +8,9 @@
 package spreadsheet
 
 import (
-	"github.com/qifengzhang007/gooxml"
-	"github.com/qifengzhang007/gooxml/color"
-	"github.com/qifengzhang007/gooxml/schema/soo/sml"
+	"github.com/Snowmanazz/gooxml"
+	"github.com/Snowmanazz/gooxml/color"
+	"github.com/Snowmanazz/gooxml/schema/soo/sml"
 )
 
 // Border is a cell border configuraton.

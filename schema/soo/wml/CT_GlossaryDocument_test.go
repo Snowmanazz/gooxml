@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/wml"
+	"github.com/Snowmanazz/gooxml/schema/soo/wml"
 )
 
 func TestCT_GlossaryDocumentConstructor(t *testing.T) {

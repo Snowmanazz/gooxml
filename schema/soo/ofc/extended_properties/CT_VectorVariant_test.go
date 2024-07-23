@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/extended_properties"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/extended_properties"
 )
 
 func TestCT_VectorVariantConstructor(t *testing.T) {

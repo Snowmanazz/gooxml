@@ -8,10 +8,10 @@
 package document
 
 import (
-	"github.com/qifengzhang007/gooxml"
-	"github.com/qifengzhang007/gooxml/measurement"
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/sharedTypes"
-	"github.com/qifengzhang007/gooxml/schema/soo/wml"
+	"github.com/Snowmanazz/gooxml"
+	"github.com/Snowmanazz/gooxml/measurement"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/sharedTypes"
+	"github.com/Snowmanazz/gooxml/schema/soo/wml"
 )
 
 // ParagraphSpacing controls the spacing for a paragraph and its lines.

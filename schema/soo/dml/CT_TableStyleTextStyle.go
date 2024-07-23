@@ -12,7 +12,7 @@ package dml
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
+	"github.com/Snowmanazz/gooxml"
 )
 
 type CT_TableStyleTextStyle struct {

@@ -12,7 +12,7 @@ package wml
 import (
 	"encoding/xml"
 	"fmt"
-	"github.com/qifengzhang007/gooxml"
+	"github.com/Snowmanazz/gooxml"
 	"strconv"
 )
 

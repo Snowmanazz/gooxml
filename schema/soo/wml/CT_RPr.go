@@ -12,7 +12,7 @@ package wml
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
+	"github.com/Snowmanazz/gooxml"
 )
 
 //开发参考文件

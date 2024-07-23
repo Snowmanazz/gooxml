@@ -8,11 +8,11 @@
 package document
 
 import (
-	"github.com/qifengzhang007/gooxml"
-	"github.com/qifengzhang007/gooxml/color"
-	"github.com/qifengzhang007/gooxml/measurement"
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/sharedTypes"
-	"github.com/qifengzhang007/gooxml/schema/soo/wml"
+	"github.com/Snowmanazz/gooxml"
+	"github.com/Snowmanazz/gooxml/color"
+	"github.com/Snowmanazz/gooxml/measurement"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/sharedTypes"
+	"github.com/Snowmanazz/gooxml/schema/soo/wml"
 )
 
 // RunProperties controls run styling properties

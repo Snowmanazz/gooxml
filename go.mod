@@ -1,3 +1,3 @@
-module github.com/qifengzhang007/gooxml
+module github.com/Snowmanazz/gooxml
 
 go 1.15

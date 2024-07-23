@@ -14,7 +14,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/sharedTypes"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/sharedTypes"
 )
 
 type CT_ModifyVerifier struct {

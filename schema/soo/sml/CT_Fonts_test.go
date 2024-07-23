@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/sml"
+	"github.com/Snowmanazz/gooxml/schema/soo/sml"
 )
 
 func TestCT_FontsConstructor(t *testing.T) {

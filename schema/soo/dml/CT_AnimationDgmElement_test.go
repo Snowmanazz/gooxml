@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/dml"
+	"github.com/Snowmanazz/gooxml/schema/soo/dml"
 )
 
 func TestCT_AnimationDgmElementConstructor(t *testing.T) {

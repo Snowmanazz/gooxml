@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/purl.org/dc/terms"
+	"github.com/Snowmanazz/gooxml/schema/purl.org/dc/terms"
 )
 
 func TestPointConstructor(t *testing.T) {

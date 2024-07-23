@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/pml"
+	"github.com/Snowmanazz/gooxml/schema/soo/pml"
 )
 
 func TestCT_BuildListConstructor(t *testing.T) {

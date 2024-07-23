@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/dml/diagram"
+	"github.com/Snowmanazz/gooxml/schema/soo/dml/diagram"
 )
 
 func TestAG_ConstraintRefAttributesConstructor(t *testing.T) {

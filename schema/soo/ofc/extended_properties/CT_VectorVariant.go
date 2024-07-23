@@ -12,8 +12,8 @@ package extended_properties
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/docPropsVTypes"
+	"github.com/Snowmanazz/gooxml"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/docPropsVTypes"
 )
 
 type CT_VectorVariant struct {

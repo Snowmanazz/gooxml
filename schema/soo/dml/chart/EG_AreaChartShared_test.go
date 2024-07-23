@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/dml/chart"
+	"github.com/Snowmanazz/gooxml/schema/soo/dml/chart"
 )
 
 func TestEG_AreaChartSharedConstructor(t *testing.T) {

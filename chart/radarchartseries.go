@@ -8,9 +8,9 @@
 package chart
 
 import (
-	"github.com/qifengzhang007/gooxml/drawing"
-	"github.com/qifengzhang007/gooxml/schema/soo/dml"
-	crt "github.com/qifengzhang007/gooxml/schema/soo/dml/chart"
+	"github.com/Snowmanazz/gooxml/drawing"
+	"github.com/Snowmanazz/gooxml/schema/soo/dml"
+	crt "github.com/Snowmanazz/gooxml/schema/soo/dml/chart"
 )
 
 // RadarChartSeries is a series to be used on an Radar chart.

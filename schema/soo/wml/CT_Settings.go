@@ -13,9 +13,9 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	"github.com/qifengzhang007/gooxml"
-	"github.com/qifengzhang007/gooxml/schema/soo/ofc/math"
-	"github.com/qifengzhang007/gooxml/schema/soo/schemaLibrary"
+	"github.com/Snowmanazz/gooxml"
+	"github.com/Snowmanazz/gooxml/schema/soo/ofc/math"
+	"github.com/Snowmanazz/gooxml/schema/soo/schemaLibrary"
 )
 
 type CT_Settings struct {

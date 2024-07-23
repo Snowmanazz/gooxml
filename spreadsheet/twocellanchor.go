@@ -8,8 +8,8 @@
 package spreadsheet
 
 import (
-	"github.com/qifengzhang007/gooxml/measurement"
-	sd "github.com/qifengzhang007/gooxml/schema/soo/dml/spreadsheetDrawing"
+	"github.com/Snowmanazz/gooxml/measurement"
+	sd "github.com/Snowmanazz/gooxml/schema/soo/dml/spreadsheetDrawing"
 )
 
 // TwoCellAnchor is an anchor that is attached to a top-left cell with a fixed

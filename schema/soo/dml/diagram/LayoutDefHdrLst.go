@@ -12,7 +12,7 @@ package diagram
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
+	"github.com/Snowmanazz/gooxml"
 )
 
 type LayoutDefHdrLst struct {

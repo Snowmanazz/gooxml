@@ -12,7 +12,7 @@ package pml
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
+	"github.com/Snowmanazz/gooxml"
 )
 
 type EG_ShowType struct {

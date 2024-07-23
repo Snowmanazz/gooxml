@@ -13,7 +13,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	"github.com/qifengzhang007/gooxml/schema/soo/dml"
+	"github.com/Snowmanazz/gooxml/schema/soo/dml"
 )
 
 // ST_LayoutShapeType is a union type

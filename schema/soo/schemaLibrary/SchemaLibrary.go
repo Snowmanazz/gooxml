@@ -12,7 +12,7 @@ package schemaLibrary
 import (
 	"encoding/xml"
 
-	"github.com/qifengzhang007/gooxml"
+	"github.com/Snowmanazz/gooxml"
 )
 
 type SchemaLibrary struct {
