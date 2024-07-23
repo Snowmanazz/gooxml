@@ -15,7 +15,6 @@ func NewCT_AlternateContent() *CT_AlternateContent {
 	return ret
 }
 func (m *CT_AlternateContent) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
-	start.Attr = append(start.Attr, xml.Attr{Name: xml.Name{Local: "xmlns:mc"}, Value: "http://schemas.openxmlformats.org/markup-compatibility/2006"})
 	e.EncodeToken(start)
 	if m.Choice != nil {
 		seanchor := xml.StartElement{Name: xml.Name{Local: "mc:Choice"}}

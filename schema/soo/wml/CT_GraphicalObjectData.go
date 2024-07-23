@@ -18,7 +18,7 @@ import (
 
 type CT_GraphicalObjectData struct {
 	UriAttr string
-	WdWsp   []*WdWsp
+	WdWsp   []*WdWps
 	Any     []gooxml.Any
 }
 
@@ -37,7 +37,7 @@ func (m *CT_GraphicalObjectData) MarshalXML(e *xml.Encoder, start xml.StartEleme
 		}
 	}
 	if m.WdWsp != nil {
-		sewsp := xml.StartElement{Name: xml.Name{Local: "wp:wsp"}}
+		sewsp := xml.StartElement{Name: xml.Name{Local: "wps:wsp"}}
 		for _, c := range m.WdWsp {
 			e.EncodeElement(c, sewsp)
 		}
@@ -68,7 +68,7 @@ lCT_GraphicalObjectData:
 		case xml.StartElement:
 			switch el.Name {
 			case xml.Name{Space: "http://schemas.microsoft.com/office/word/2010/wordprocessingShape", Local: "wsp"}:
-				tmp := NewWdWsp()
+				tmp := NewWdWps()
 				if err := d.DecodeElement(tmp, &el); err != nil {
 					return err
 				}
